@@ -1,5 +1,6 @@
 package com.mirea.butcher_shop.models;
 
+import com.mirea.butcher_shop.models.enums.TypeOfProduct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,8 @@ public class Product {
     private String description;
 
     private double price;
+
+    private TypeOfProduct type;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private List<Image> images = new ArrayList<>();

@@ -29,10 +29,6 @@ public class User implements UserDetails {
 
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn
-    private Image avatar;
-
     private boolean active;
 
     @Column(length = 1000)

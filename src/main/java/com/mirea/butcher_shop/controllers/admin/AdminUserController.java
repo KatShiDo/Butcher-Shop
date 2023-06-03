@@ -1,4 +1,4 @@
-package com.mirea.butcher_shop.controllers;
+package com.mirea.butcher_shop.controllers.admin;
 
 import com.mirea.butcher_shop.models.User;
 import com.mirea.butcher_shop.models.enums.Role;
@@ -13,22 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-public class AdminController {
+public class AdminUserController {
 
     private final UserService userService;
     private final ProductService productService;
-
-    @GetMapping("/admin")
-    public String admin(Model model) {
-        model.addAttribute("users", userService.getAll());
-        model.addAttribute("products", productService.getAll());
-        return "admin/adminView";
-    }
 
     @PostMapping("/admin/user/ban/{id}")
     public String userBan(@PathVariable("id") Long id) {
@@ -37,9 +31,10 @@ public class AdminController {
     }
 
     @GetMapping("/admin/user/edit/{user}")
-    public String userEdit(@PathVariable("user") User user, Model model) {
-        model.addAttribute("user", user);
+    public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
+        model.addAttribute("targetUser", user);
         model.addAttribute("roles", Role.values());
+        model.addAttribute("user", userService.getByPrincipal(principal));
         return "admin/userEditView";
     }
 
@@ -47,5 +42,13 @@ public class AdminController {
     public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeRoles(user, form);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/admin/user/{user}")
+    public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
+        model.addAttribute("targetUser", user);
+        model.addAttribute("products", user.getProducts());
+        model.addAttribute("user", userService.getByPrincipal(principal));
+        return "admin/userInfoView";
     }
 }
