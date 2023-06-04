@@ -14,9 +14,43 @@
         <title>Мясная лавка</title>
     </head>
     <body>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar bg-dark border-bottom border-bottom-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a href="/">
+            <a class="navbar-brand mb-0 h1" href="/">Мясная Лавка</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Меню
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/products/burgers">Бургеры</a></li>
+                            <li><a class="dropdown-item" href="/products/pizza">Пицца</a></li>
+                            <li><a class="dropdown-item" href="/products/snacks">Закуски</a></li>
+                            <li><a class="dropdown-item" href="/products/drinks">Напитки</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <#if currentUser.email??>
+                <div class="dropdown text-end">
+                    <a href="/profile">
+                        <img src="/static/images/avatar.png" alt="mdo"
+                             width="32" height="32" class="rounded-circle">
+                    </a>
+                </div>
+            <#else>
+                <button class="btn btn-light my-2 my-sm-0" type="button"
+                        onclick="window.location.href = '/login'">
+                    Войти
+                </button>
+            </#if>
+
+
+            <#--<a href="/">
                 <span class="navbar-brand mb-0 h1">Мясная Лавка</span>
             </a>
             <#if currentUser.email??>
@@ -31,7 +65,7 @@
                         onclick="window.location.href = '/login'">
                     Войти
                 </button>
-            </#if>
+            </#if>-->
         </div>
     </nav>
     <div class="container mt-4">

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -19,10 +18,34 @@ public class ProductsController {
     private final ProductService productService;
     private final UserService userService;
 
-    @GetMapping("/products")
-    public String products(@RequestParam(name = "searchWord", required = false) String searchWord, Principal principal, Model model) {
-        model.addAttribute("products", productService.getAll());
-        model.addAttribute("searchWord", searchWord);
+    @GetMapping("/products/burgers")
+    public String productsBurgers(Principal principal, Model model) {
+        model.addAttribute("products", productService.getBurgers());
+        model.addAttribute("typeOfProduct", "Бургеры");
+        model.addAttribute("user", userService.getByPrincipal(principal));
+        return "products/productsView";
+    }
+
+    @GetMapping("/products/pizza")
+    public String productsPizza(Principal principal, Model model) {
+        model.addAttribute("products", productService.getPizza());
+        model.addAttribute("typeOfProduct", "Пицца");
+        model.addAttribute("user", userService.getByPrincipal(principal));
+        return "products/productsView";
+    }
+
+    @GetMapping("/products/snacks")
+    public String productsSnacks(Principal principal, Model model) {
+        model.addAttribute("products", productService.getSnacks());
+        model.addAttribute("typeOfProduct", "Закуски");
+        model.addAttribute("user", userService.getByPrincipal(principal));
+        return "products/productsView";
+    }
+
+    @GetMapping("/products/drinks")
+    public String productsDrinks(Principal principal, Model model) {
+        model.addAttribute("products", productService.getDrinks());
+        model.addAttribute("typeOfProduct", "Напитки");
         model.addAttribute("user", userService.getByPrincipal(principal));
         return "products/productsView";
     }

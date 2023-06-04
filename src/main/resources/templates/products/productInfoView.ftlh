@@ -1,11 +1,6 @@
 <#import "../shared/layout.ftlh" as layout>
 <@layout.template currentUser=user>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <#list images as image>
-                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-            </#list>
-        </ol>
+    <div id="imagesCarousel" class="carousel slide">
         <div class="carousel-inner">
             <#list images as image>
                 <div class="carousel-item <#if image.previewImage>active</#if>">
@@ -27,16 +22,16 @@
             </#list>
 
         </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imagesCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
     <hr>
-    <h1 style="text-align: center">${product.title} | ${product.price} ₽</h1>
+    <h1 style="text-align: center">${product.title} | ${product.type} | ${product.price} ₽</h1>
     <p style="text-align: center">${product.description}</p>
 </@layout.template>

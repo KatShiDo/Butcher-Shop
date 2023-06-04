@@ -35,9 +35,22 @@ public class UserService {
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(Role.ROLE_USER);
+        user.getRoles().add(Role.ROLE_ADMIN);
         log.info("Saving new User with Email: {}", email);
         userRepository.save(user);
         return true;
+    }
+
+    public void update(User user) {
+        String email = user.getEmail();
+        User userFromDb = userRepository.findByEmail(email);
+        userFromDb.setPassword(user.getPassword());
+        userFromDb.setName(user.getName());
+        userFromDb.setPhoneNumber(user.getPhoneNumber());
+        userFromDb.setProducts(user.getProducts());
+        userFromDb.setActive(user.isActive());
+        userFromDb.setRoles(user.getRoles());
+        userRepository.save(userFromDb);
     }
 
     public void ban(Long id) {

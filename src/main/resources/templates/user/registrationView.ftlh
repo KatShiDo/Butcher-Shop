@@ -1,7 +1,6 @@
 <#import "../shared/layout.ftlh" as layout>
 <@layout.template currentUser=user>
     <h1 style="text-align: center">Регистрация</h1>
-    <hr>
     <form action="/registration" method="post">
         <div class="form-group">
             <label for="name">Имя пользователя</label>
@@ -20,6 +19,7 @@
             <input type="password" class="form-control" id="password" required name="password">
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <br>
         <button type="submit" style="width: 100%" class="btn btn-dark">Зарегистрироваться</button>
     </form>
     <#if errorMessage??>

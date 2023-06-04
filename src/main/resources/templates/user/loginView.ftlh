@@ -1,7 +1,6 @@
 <#import "../shared/layout.ftlh" as layout>
 <@layout.template currentUser=user>
     <h1 style="text-align: center">Авторизация</h1>
-    <hr>
     <form action="/login" method="post">
         <div class="form-group">
             <label for="email">Электронная почта</label>
@@ -18,6 +17,7 @@
             </div>
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <br>
         <button type="submit" style="width: 100%" class="btn btn-dark">Войти</button>
     </form>
     <hr>

@@ -1,6 +1,6 @@
 <#import "../shared/layout.ftlh" as layout>
 <@layout.template currentUser=user>
-    <h1 style="text-align: center">Панель администратора</h1><hr>
+    <h1 style="text-align: center">Панель администратора</h1>
     <hr>
     <table class="table table-hover table-dark">
         <tr>
@@ -37,6 +37,13 @@
         Название позиции: <input type="text" name="title"><br><br>
         Описание: <input type="text" name="description"><br><br>
         Цена: <input type="number" step="0.01" name="price"><br><br>
+        <select name="type">
+            <option value="">Тип позиции</option>
+            <option value="BURGER">Бургер</option>
+            <option value="PIZZA">Пицца</option>
+            <option value="SNACK">Закуска</option>
+            <option value="DRINK">Напиток</option>
+        </select><br><br>
         Первая картинка: <input type="file" name="file1"><br><br>
         Вторая картинка: <input type="file" name="file2"><br><br>
         Третья картинка: <input type="file" name="file3"><br><br>

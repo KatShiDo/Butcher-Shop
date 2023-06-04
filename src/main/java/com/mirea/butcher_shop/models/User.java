@@ -42,6 +42,10 @@ public class User implements UserDetails {
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private List<Product> products = new ArrayList<>();
 
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
     private LocalDateTime creationDate;
 
     @PrePersist

@@ -25,12 +25,12 @@ public class AdminProductsController {
                                 @RequestParam("file3") MultipartFile file3,
                                 Product product) throws IOException {
         productService.save(product, file1, file2, file3);
-        return "redirect:/products";
+        return "redirect:/admin";
     }
 
     @PostMapping("/admin/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.delete(id);
-        return "redirect:/products";
+        return "redirect:/admin";
     }
 }
