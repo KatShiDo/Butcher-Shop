@@ -32,6 +32,6 @@
         </button>
     </div>
     <hr>
-    <h1 style="text-align: center">${product.title} | ${product.type} | ${product.price} ₽</h1>
+    <h1 style="text-align: center">${product.title} | ${product.price} ₽</h1>
     <p style="text-align: center">${product.description}</p>
 </@layout.template>
