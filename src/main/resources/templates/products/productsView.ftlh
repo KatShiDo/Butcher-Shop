@@ -15,15 +15,15 @@
                             <p class="card-text">${product.price} ₽</p>
                         </div>
                         <div class="card-footer">
-                            <#if user.email??>
-                                <#if user.products.contains(product)>
+                            <#--<#if user.email?? && userProducts?has_content>
+                                <#if userProducts?seq_contains(product)>
                                     Уже в корзине
-                                <#else>
+                                <#else>-->
                                     <a href="/cart/add/${product.id}">Добавить в корзину</a>
-                                </#if>
+                                <#--</#if>
                             <#else>
                                 <a href="/cart/add/${product.id}">Добавить в корзину</a>
-                            </#if>
+                            </#if>-->
                         </div>
                     </div>
                     </a>

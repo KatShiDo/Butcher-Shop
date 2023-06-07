@@ -1,5 +1,6 @@
 package com.mirea.butcher_shop.controllers.admin;
 
+import com.mirea.butcher_shop.models.Product;
 import com.mirea.butcher_shop.models.User;
 import com.mirea.butcher_shop.models.enums.Role;
 import com.mirea.butcher_shop.services.ProductService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -47,7 +48,9 @@ public class AdminUserController {
     @GetMapping("/admin/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("targetUser", user);
-        model.addAttribute("products", user.getProducts());
+        Set<Product> set = new HashSet<>(user.getProducts());
+        List<Product> products = new ArrayList<>(set);
+        model.addAttribute("products", products);
         model.addAttribute("user", userService.getByPrincipal(principal));
         return "admin/userInfoView";
     }

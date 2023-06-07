@@ -15,7 +15,7 @@
                             <p class="card-text">${product.price} ₽</p>
                         </div>
                         <div class="card-footer">
-                            <a href="/cart/add/${product.id}">Добавить в корзину</a>
+                            <a href="/cart/delete/${product.id}">Удалить из корзины</a>
                         </div>
                     </div>
                 </a>

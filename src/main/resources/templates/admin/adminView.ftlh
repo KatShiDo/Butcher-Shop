@@ -12,20 +12,20 @@
             <th scope="col">Редактирование</th>
             <th scope="col">Подробная информация</th>
         </tr>
-        <#list users as user>
+        <#list users as anotherUser>
             <tr>
-                <th>${user.email}</th>
-                <th>${user.phoneNumber}</th>
-                <th><#if user.active>true<#else>false</#if></th>
-                <th><#list user.roles as role>${role}</#list></th>
+                <th>${anotherUser.email}</th>
+                <th>${anotherUser.phoneNumber}</th>
+                <th><#if anotherUser.active>true<#else>false</#if></th>
+                <th><#list anotherUser.roles as role>${role} </#list></th>
                 <th>
-                    <form action="/admin/user/ban/${user.id}" method="post">
+                    <form action="/admin/user/ban/${anotherUser.id}" method="post">
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
                         <input type="submit" class="btn btn-light" value="Бан">
                     </form>
                 </th>
-                <th><a href="/admin/user/edit/${user.id}">Редактировние</a></th>
-                <th><a href="/user/${user.id}">Подробная информация</a></th>
+                <th><a href="/admin/user/edit/${anotherUser.id}">Редактирование</a></th>
+                <th><a href="/admin/user/${anotherUser.id}">Подробная информация</a></th>
             </tr>
         <#else>
             <h3>Пользователей нет</h3>

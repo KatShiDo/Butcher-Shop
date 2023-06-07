@@ -46,6 +46,10 @@ public class User implements UserDetails {
         products.add(product);
     }
 
+    public void deleteProduct(Product product) {
+        products.remove(product);
+    }
+
     private LocalDateTime creationDate;
 
     @PrePersist

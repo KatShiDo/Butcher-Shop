@@ -15,19 +15,25 @@
     <hr>
     <h1 style="text-align: center">Корзина пользователя ${targetUser.name}</h1>
     <br>
-    <div class="card-columns">
+    <div class="row h-100 row-cols-3 row-cols-md-3 g-4">
         <#list products as product>
-            <a href="/product/${product.id}" class="product-link">
-                <div class="card text-white bg-dark my-3 product">
+            <div class="col">
+                <a href="/products/${product.id}" class="product-link">
+                    <div class="card product">
 
-                    <img src="/images/${product.previewImageId}"
-                         class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.title}</h5>
-                        <p class="card-text">${product.price} ₽</p>
+                        <img src="/images/${product.previewImageId}"
+                             class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.title}</h5>
+                            <p class="card-text">${product.price} ₽</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="/cart/delete/${product.id}">Удалить из корзины</a>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+
         <#else>
             <h1 style="text-align: center">Не найдено</h1>
         </#list>

@@ -33,9 +33,19 @@ public class CartController {
     public String addToCart(@PathVariable Long id, Principal principal) {
         User user = userService.getByPrincipal(principal);
         Product product = productService.getById(id);
-        user.addProduct(product);
+        if (!user.getProducts().contains(product)) {
+            user.addProduct(product);
+        }
         userService.update(user);
         return "redirect:/cart";
     }
 
+    @GetMapping("/cart/delete/{id}")
+    public String deleteFromCart(@PathVariable Long id, Principal principal) {
+        User user = userService.getByPrincipal(principal);
+        Product product = productService.getById(id);
+        user.deleteProduct(product);
+        userService.update(user);
+        return "redirect:/cart";
+    }
 }

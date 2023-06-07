@@ -1,6 +1,7 @@
 package com.mirea.butcher_shop.controllers;
 
 import com.mirea.butcher_shop.models.Product;
+import com.mirea.butcher_shop.models.User;
 import com.mirea.butcher_shop.services.ProductService;
 import com.mirea.butcher_shop.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,9 @@ public class ProductsController {
     public String productsBurgers(Principal principal, Model model) {
         model.addAttribute("products", productService.getBurgers());
         model.addAttribute("typeOfProduct", "Бургеры");
-        model.addAttribute("user", userService.getByPrincipal(principal));
+        User user = userService.getByPrincipal(principal);
+        model.addAttribute("user", user);
+        model.addAttribute("userProducts", user.getProducts());
         return "products/productsView";
     }
 
@@ -30,7 +33,9 @@ public class ProductsController {
     public String productsPizza(Principal principal, Model model) {
         model.addAttribute("products", productService.getPizza());
         model.addAttribute("typeOfProduct", "Пицца");
-        model.addAttribute("user", userService.getByPrincipal(principal));
+        User user = userService.getByPrincipal(principal);
+        model.addAttribute("user", user);
+        model.addAttribute("userProducts", user.getProducts());
         return "products/productsView";
     }
 
@@ -38,7 +43,9 @@ public class ProductsController {
     public String productsSnacks(Principal principal, Model model) {
         model.addAttribute("products", productService.getSnacks());
         model.addAttribute("typeOfProduct", "Закуски");
-        model.addAttribute("user", userService.getByPrincipal(principal));
+        User user = userService.getByPrincipal(principal);
+        model.addAttribute("user", user);
+        model.addAttribute("userProducts", user.getProducts());
         return "products/productsView";
     }
 
@@ -46,7 +53,9 @@ public class ProductsController {
     public String productsDrinks(Principal principal, Model model) {
         model.addAttribute("products", productService.getDrinks());
         model.addAttribute("typeOfProduct", "Напитки");
-        model.addAttribute("user", userService.getByPrincipal(principal));
+        User user = userService.getByPrincipal(principal);
+        model.addAttribute("user", user);
+        model.addAttribute("userProducts", user.getProducts());
         return "products/productsView";
     }
 

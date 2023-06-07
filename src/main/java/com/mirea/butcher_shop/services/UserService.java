@@ -1,5 +1,6 @@
 package com.mirea.butcher_shop.services;
 
+import com.mirea.butcher_shop.models.Product;
 import com.mirea.butcher_shop.models.User;
 import com.mirea.butcher_shop.models.enums.Role;
 import com.mirea.butcher_shop.repositories.IUserRepository;
@@ -85,5 +86,9 @@ public class UserService {
             }
         }
         userRepository.save(user);
+    }
+
+    public User getById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }
