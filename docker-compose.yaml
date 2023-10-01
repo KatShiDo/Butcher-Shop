@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://db:5432/ButcherShop'
+      SPRING_DATASOURCE_USERNAME: 'postgres'
+      SPRING_DATASOURCE_PASSWORD: '1234'
+    volumes:
+      - spring:/home
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "8002:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: ButcherShop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+volumes:
+  postgres-db:
+  spring:

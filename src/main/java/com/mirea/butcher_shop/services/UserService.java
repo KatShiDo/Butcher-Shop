@@ -24,6 +24,7 @@ public class UserService {
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+
     public List<User> getAll() {
         return userRepository.findAll();
     }
