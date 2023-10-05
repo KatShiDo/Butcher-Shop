@@ -3,6 +3,8 @@ package com.mirea.butcher_shop.controllers;
 import com.mirea.butcher_shop.models.User;
 import com.mirea.butcher_shop.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +36,6 @@ public class UserController {
             model.addAttribute("errorMessage", "Пользователь с email: " + user.getEmail() + " уже существует");
             return "user/registrationView";
         }
-        userService.create(user);
         return "redirect:/login";
     }
 
