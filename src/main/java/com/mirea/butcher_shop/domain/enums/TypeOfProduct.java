@@ -1,4 +1,4 @@
-package com.mirea.butcher_shop.models.enums;
+package com.mirea.butcher_shop.domain.enums;
 
 public enum TypeOfProduct {
     BURGER,

@@ -1,24 +1,26 @@
 package com.mirea.butcher_shop.controllers;
 
-import com.mirea.butcher_shop.models.Image;
-import com.mirea.butcher_shop.repositories.IImageRepository;
+import com.mirea.butcher_shop.domain.entities.Image;
+import com.mirea.butcher_shop.repositories.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayInputStream;
 
 @RestController
+@RequestMapping("/images")
 @RequiredArgsConstructor
 public class ImageController {
 
-    private final IImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
-    @GetMapping("/images/{id}")
+    @GetMapping("/{id}")
     private ResponseEntity<?> getImageById(@PathVariable Long id) {
         Image image = imageRepository.findById(id).orElse(null);
         assert image != null;

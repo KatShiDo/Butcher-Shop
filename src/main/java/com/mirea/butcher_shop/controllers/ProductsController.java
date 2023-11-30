@@ -1,7 +1,7 @@
 package com.mirea.butcher_shop.controllers;
 
-import com.mirea.butcher_shop.models.Product;
-import com.mirea.butcher_shop.models.User;
+import com.mirea.butcher_shop.domain.entities.Product;
+import com.mirea.butcher_shop.domain.entities.User;
 import com.mirea.butcher_shop.services.ProductService;
 import com.mirea.butcher_shop.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,17 +9,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
 @Controller
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductsController {
 
     private final ProductService productService;
     private final UserService userService;
 
-    @GetMapping("/products/burgers")
+    @GetMapping("/burgers")
     public String productsBurgers(Principal principal, Model model) {
         model.addAttribute("products", productService.getBurgers());
         model.addAttribute("typeOfProduct", "Бургеры");
@@ -29,7 +31,7 @@ public class ProductsController {
         return "products/productsView";
     }
 
-    @GetMapping("/products/pizza")
+    @GetMapping("/pizza")
     public String productsPizza(Principal principal, Model model) {
         model.addAttribute("products", productService.getPizza());
         model.addAttribute("typeOfProduct", "Пицца");
@@ -39,7 +41,7 @@ public class ProductsController {
         return "products/productsView";
     }
 
-    @GetMapping("/products/snacks")
+    @GetMapping("/snacks")
     public String productsSnacks(Principal principal, Model model) {
         model.addAttribute("products", productService.getSnacks());
         model.addAttribute("typeOfProduct", "Закуски");
@@ -49,7 +51,7 @@ public class ProductsController {
         return "products/productsView";
     }
 
-    @GetMapping("/products/drinks")
+    @GetMapping("/drinks")
     public String productsDrinks(Principal principal, Model model) {
         model.addAttribute("products", productService.getDrinks());
         model.addAttribute("typeOfProduct", "Напитки");

@@ -1,11 +1,9 @@
-package com.mirea.butcher_shop.models;
+package com.mirea.butcher_shop.domain.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "images")
@@ -29,7 +27,6 @@ public class Image {
     private boolean isPreviewImage;
 
     @Lob
-    @Type(type = "org.hibernate.type.ImageType")
     private byte[] content;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)

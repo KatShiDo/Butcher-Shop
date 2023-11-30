@@ -1,9 +1,9 @@
 package com.mirea.butcher_shop.services;
 
-import com.mirea.butcher_shop.models.Image;
-import com.mirea.butcher_shop.models.Product;
-import com.mirea.butcher_shop.models.enums.TypeOfProduct;
-import com.mirea.butcher_shop.repositories.IProductRepository;
+import com.mirea.butcher_shop.domain.entities.Image;
+import com.mirea.butcher_shop.domain.entities.Product;
+import com.mirea.butcher_shop.domain.enums.TypeOfProduct;
+import com.mirea.butcher_shop.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final IProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public List<Product> getAll() {
         return productRepository.findAll();

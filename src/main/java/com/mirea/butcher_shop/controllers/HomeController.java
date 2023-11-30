@@ -14,11 +14,10 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final ProductService productService;
     private final UserService userService;
 
     @GetMapping("/")
-    public String index(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
+    public String index(Principal principal, Model model) {
         model.addAttribute("user", userService.getByPrincipal(principal));
         return "indexView";
     }

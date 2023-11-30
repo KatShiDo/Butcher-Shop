@@ -1,11 +1,11 @@
-package com.mirea.butcher_shop.models;
+package com.mirea.butcher_shop.domain.entities;
 
-import com.mirea.butcher_shop.models.enums.TypeOfProduct;
+import com.mirea.butcher_shop.domain.enums.TypeOfProduct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

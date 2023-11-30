@@ -1,9 +1,8 @@
 package com.mirea.butcher_shop.services;
 
-import com.mirea.butcher_shop.models.Product;
-import com.mirea.butcher_shop.models.User;
-import com.mirea.butcher_shop.models.enums.Role;
-import com.mirea.butcher_shop.repositories.IUserRepository;
+import com.mirea.butcher_shop.domain.entities.User;
+import com.mirea.butcher_shop.domain.enums.Role;
+import com.mirea.butcher_shop.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -30,23 +29,28 @@ public class UserService {
     }
 
     public boolean create(User user) {
-        String email = user.getEmail();
-        if (userRepository.findByEmail(email) != null) {
+        String username = user.getUsername();
+        if (userRepository.findByUsername(username) != null) {
             return false;
         }
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
-        log.info("Saving new User with Email: {}", email);
+        if (userRepository.count() == 0) {
+            user.getRoles().add(Role.ROLE_ADMIN);
+        }
+        else {
+            user.getRoles().add(Role.ROLE_USER);
+        }
+        log.info("Saving new User with username: {}", username);
         userRepository.save(user);
         return true;
     }
 
     public void update(User user) {
-        String email = user.getEmail();
-        User userFromDb = userRepository.findByEmail(email);
+        String username = user.getUsername();
+        User userFromDb = userRepository.findByUsername(username);
         userFromDb.setPassword(user.getPassword());
-        userFromDb.setName(user.getName());
+        userFromDb.setUsername(user.getUsername());
         userFromDb.setPhoneNumber(user.getPhoneNumber());
         userFromDb.setProducts(user.getProducts());
         userFromDb.setActive(user.isActive());
@@ -59,11 +63,11 @@ public class UserService {
         if (user != null) {
             if (user.isActive()) {
                 user.setActive(false);
-                log.info("User with Email: {} was banned", user.getEmail());
+                log.info("User with username: {} was banned", user.getUsername());
             }
             else {
                 user.setActive(true);
-                log.info("User with Email: {} was unbanned", user.getEmail());
+                log.info("User with username: {} was unbanned", user.getUsername());
             }
             userRepository.save(user);
         }
@@ -73,7 +77,7 @@ public class UserService {
         if (principal == null) {
             return new User();
         }
-        return userRepository.findByEmail(principal.getName());
+        return userRepository.findByUsername(principal.getName());
     }
 
     public void changeRoles(User user, Map<String, String> form) {
