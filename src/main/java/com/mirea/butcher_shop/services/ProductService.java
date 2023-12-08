@@ -3,7 +3,7 @@ package com.mirea.butcher_shop.services;
 import com.mirea.butcher_shop.domain.entities.Image;
 import com.mirea.butcher_shop.domain.entities.Product;
 import com.mirea.butcher_shop.domain.enums.TypeOfProduct;
-import com.mirea.butcher_shop.repositories.ProductRepository;
+import com.mirea.butcher_shop.repo.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -88,7 +88,7 @@ public class ProductService {
             product.addImage(image3);
         }
 
-        log.info("Saving new Product with Title: {}", product.getTitle());
+        log.info("Saving new Product with title: {}", product.getTitle());
         Product productFromDb = productRepository.save(product);
         productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);

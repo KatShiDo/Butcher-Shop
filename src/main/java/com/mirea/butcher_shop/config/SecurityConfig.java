@@ -1,6 +1,8 @@
-package com.mirea.butcher_shop.configurations;
+package com.mirea.butcher_shop.config;
 
+import com.mirea.butcher_shop.repo.UserRepository;
 import com.mirea.butcher_shop.services.CustomUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,11 +16,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final UserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
+        return new CustomUserDetailsService(userRepository);
     }
 
     @Bean
@@ -29,7 +34,7 @@ public class SecurityConfig {
                         .requestMatchers("/profile", "/cart/**")
                         .authenticated()
                         .requestMatchers("/admin/**")
-                        .hasRole("ROLE_ADMIN"))
+                        .hasRole("ADMIN"))
                 .formLogin(login -> login
                         .loginPage("/login")
                         .permitAll())

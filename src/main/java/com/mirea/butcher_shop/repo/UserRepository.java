@@ -1,10 +1,11 @@
-package com.mirea.butcher_shop.repositories;
+package com.mirea.butcher_shop.repo;
 
 import com.mirea.butcher_shop.domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
+import java.util.Optional;
 
-    User findByUsername(String username);
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByUsername(String username);
 }

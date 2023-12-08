@@ -6,7 +6,6 @@ import com.mirea.butcher_shop.domain.enums.Role;
 import com.mirea.butcher_shop.services.ProductService;
 import com.mirea.butcher_shop.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
-@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
 
     private final UserService userService;

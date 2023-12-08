@@ -1,7 +1,7 @@
 package com.mirea.butcher_shop.controllers;
 
 import com.mirea.butcher_shop.domain.entities.Image;
-import com.mirea.butcher_shop.repositories.ImageRepository;
+import com.mirea.butcher_shop.repo.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;

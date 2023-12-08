@@ -2,7 +2,7 @@ package com.mirea.butcher_shop.services;
 
 import com.mirea.butcher_shop.domain.entities.User;
 import com.mirea.butcher_shop.domain.enums.Role;
-import com.mirea.butcher_shop.repositories.UserRepository;
+import com.mirea.butcher_shop.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +30,7 @@ public class UserService {
 
     public boolean create(User user) {
         String username = user.getUsername();
-        if (userRepository.findByUsername(username) != null) {
+        if (userRepository.findByUsername(username).isPresent()) {
             return false;
         }
         user.setActive(true);
@@ -46,19 +46,26 @@ public class UserService {
         return true;
     }
 
-    public void update(User user) {
+    public boolean update(User user) {
         String username = user.getUsername();
-        User userFromDb = userRepository.findByUsername(username);
-        userFromDb.setPassword(user.getPassword());
-        userFromDb.setUsername(user.getUsername());
-        userFromDb.setPhoneNumber(user.getPhoneNumber());
-        userFromDb.setProducts(user.getProducts());
-        userFromDb.setActive(user.isActive());
-        userFromDb.setRoles(user.getRoles());
-        userRepository.save(userFromDb);
+        var optionalUser = userRepository.findByUsername(username);
+        if (optionalUser.isPresent()) {
+            var userFromDb = optionalUser.get();
+            userFromDb.setPassword(user.getPassword());
+            userFromDb.setUsername(user.getUsername());
+            userFromDb.setPhoneNumber(user.getPhoneNumber());
+            userFromDb.setProducts(user.getProducts());
+            userFromDb.setActive(user.isActive());
+            userFromDb.setRoles(user.getRoles());
+            userRepository.save(userFromDb);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public void ban(Long id) {
+    public boolean ban(Long id) {
         User user = userRepository.findById(id).orElse(null);
         if (user != null) {
             if (user.isActive()) {
@@ -70,6 +77,10 @@ public class UserService {
                 log.info("User with username: {} was unbanned", user.getUsername());
             }
             userRepository.save(user);
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -77,7 +88,7 @@ public class UserService {
         if (principal == null) {
             return new User();
         }
-        return userRepository.findByUsername(principal.getName());
+        return userRepository.findByUsername(principal.getName()).orElse(null);
     }
 
     public void changeRoles(User user, Map<String, String> form) {
