@@ -1,6 +1,6 @@
 <#import "../shared/layout.ftlh" as layout>
 <@layout.template currentUser=user>
-    <h1 style="text-align: center">Редактирование пользователя ${targetUser.name}</h1>
+    <h1 style="text-align: center">Редактирование пользователя ${targetUser.username}</h1>
     <hr>
     <form action="/admin/user/edit" method="post">
         <#list roles as role>

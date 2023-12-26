@@ -7,13 +7,13 @@
              style="border:2px solid black; border-radius: 20px" height="120" alt="">
         <br>
         <br>
-        <h2>${targetUser.name}</h2>
+        <h2>${targetUser.username}</h2>
         <br>
         Номер телефона: <b>${targetUser.phoneNumber}</b>
     </div>
     <br>
     <hr>
-    <h1 style="text-align: center">Корзина пользователя ${targetUser.name}</h1>
+    <h1 style="text-align: center">Корзина пользователя ${targetUser.username}</h1>
     <br>
     <div class="row h-100 row-cols-3 row-cols-md-3 g-4">
         <#list products as product>

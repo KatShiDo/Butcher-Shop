@@ -53,10 +53,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/user/edit/{user}")
-    public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
+    @GetMapping("/user/edit/{id}")
+    public String userEdit(@PathVariable("id") Long id, Model model, Principal principal) {
+        var user = userService.getById(id);
         model.addAttribute("targetUser", user);
         model.addAttribute("roles", Role.values());
+        var principalUser = userService.getByPrincipal(principal);
         model.addAttribute("user", userService.getByPrincipal(principal));
         return "admin/userEditView";
     }
@@ -67,8 +69,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/user/{user}")
-    public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
+    @GetMapping("/user/{id}")
+    public String userInfo(@PathVariable("id") Long id, Model model, Principal principal) {
+        var user = userService.getById(id);
         model.addAttribute("targetUser", user);
         Set<Product> set = new HashSet<>(user.getProducts());
         List<Product> products = new ArrayList<>(set);
