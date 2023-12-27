@@ -4,6 +4,7 @@ import com.mirea.butcher_shop.domain.entities.Image;
 import com.mirea.butcher_shop.domain.entities.Product;
 import com.mirea.butcher_shop.domain.enums.TypeOfProduct;
 import com.mirea.butcher_shop.repo.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -108,6 +109,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    @Transactional
     public Product getById(Long id) {
         return productRepository.findById(id).orElse(null);
     }

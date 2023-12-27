@@ -4,6 +4,7 @@ import com.mirea.butcher_shop.domain.entities.Product;
 import com.mirea.butcher_shop.domain.entities.User;
 import com.mirea.butcher_shop.services.ProductService;
 import com.mirea.butcher_shop.services.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +62,8 @@ public class ProductsController {
         return "products/productsView";
     }
 
-    @GetMapping("/products/{id}")
+    @Transactional
+    @GetMapping("/{id}")
     public String productInfo(@PathVariable Long id, Model model, Principal principal) {
         Product product = productService.getById(id);
         model.addAttribute("product", product);
